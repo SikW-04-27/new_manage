@@ -2,7 +2,6 @@
 // 创建路由器
 import { createRouter, createWebHistory } from 'vue-router'
 // 懒加载
-import { defineAsyncComponent } from 'vue'
 const _import = (path) => () => import(`../views/${path}.vue`);
 
 
@@ -52,6 +51,8 @@ router.beforeEach((to, from, next) => {
     if (to.fullPath === '/login') {
         next()
     } else {
+        console.log(to.fullPath);
+        // proxy.$X.updata('activeName', to.fullPath)
         if (sessionStorage.getItem('USER')) {
             next()
         } else {

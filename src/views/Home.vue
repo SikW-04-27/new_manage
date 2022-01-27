@@ -5,6 +5,7 @@
             <Nav 
                 @listen="jump"
                 v-if="proxy.$router.currentRoute.value.fullPath !== '/login'"
+                v-bind:routejump="proxy.$router.currentRoute.value.fullPath"
             ></Nav>
             <!-- <Userinfo></Userinfo> -->
         </el-header>
@@ -33,6 +34,9 @@ export default {
     components: {
         Nav,
         Userinfo
+    },
+    props:{
+        routejump:''
     },
     setup(props) {
         let router = useRouter();

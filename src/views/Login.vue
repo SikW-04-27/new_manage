@@ -20,14 +20,6 @@
                     :prefix-icon="Lock"
                 />
                 <br/>
-                <el-input
-                    v-model="key"
-                    type="password"
-                    placeholder="请输入管理员密钥"
-                    show-password
-                    :prefix-icon="Key"
-                />
-                <br/>
                 <el-button type="primary" @click="login">登录</el-button>
             </el-main>
         </el-container>
@@ -46,7 +38,6 @@ export default {
         const { proxy } = getCurrentInstance();
         let username = ref()
         let password = ref()
-        let key = ref()
         
         const router = useRouter();
     
@@ -63,6 +54,9 @@ export default {
                 const code = result.code;
                 loading.close()
                 if(code === 2100){
+                    console.log(1111);
+                    proxy.$X.updata('manageinfo', result.data)
+                    console.log(proxy.$X.state.manageinfo);
                     sessionStorage.setItem('USER', result.data.token)
                     router.replace({path: '/registered'})
                     proxy.$X.showmes('success', '成功')
@@ -81,7 +75,6 @@ export default {
         return {
             username,
             password,
-            key,
             login,
             User,
             Lock,

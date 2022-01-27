@@ -19,4 +19,7 @@ export default {
 
     // 所有预约时间段
     allappointment: [],
+
+    // 首次加载页面的导航栏指向
+    activeName: ''
 }

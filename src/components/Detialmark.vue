@@ -112,6 +112,7 @@ export default {
 
         let confirm = () => {
             let manageinfo = proxy.$X.state.manageinfo;
+            console.log(manageinfo);
             let userinfo = proxy.$X.state.personmark
             addAppraise({
                 adminId: manageinfo.uuid,

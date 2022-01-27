@@ -6,6 +6,20 @@
             <!-- <el-table-column prop="studentId" label="学号" width="120"></el-table-column> -->
             <el-table-column prop="major" label="学院" width="200"></el-table-column>
             <el-table-column prop="college" label="专业" width="200"></el-table-column>
+            <el-table-column
+                prop="status"
+                label="状态"
+                width="100"
+                sortable
+                >
+                <template #default="scope">
+                    <el-tag
+                    :type="scope.row.status === '淘汰' ? 'danger' : 'success'"
+                    disable-transitions
+                    >{{ scope.row.status === '淘汰' ? '已淘汰' : '考核中' }}</el-tag
+                    >
+                </template>
+            </el-table-column>
             <!-- <el-table-column prop="phoneNumber" label="联系方式" width="200"></el-table-column> -->
             <el-table-column align="right">
             <template #header>

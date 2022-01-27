@@ -2,14 +2,15 @@
   <!-- <el-button type="text" @click="dialogVisible = true"
     >click to open the Dialog</el-button
   > -->
-  <el-icon :size="20" @click="dialogVisible = true">
+  <el-icon :size="20" @click="openuser">
       <Avatar/>
     </el-icon>
     <el-dialog
     v-model="dialogVisible"
     title="账号信息"
   >
-    <span>姓名:</span>
+    <span>姓名:{{name}}</span><br/><br/>
+    <span>方向:{{direction}}</span>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogVisible = false">取消</el-button>
@@ -20,7 +21,7 @@
 </template>
 
 <script>
-import { ref, getCurrentInstance  } from 'vue'
+import { ref, getCurrentInstance, onMounted  } from 'vue'
 import {useRouter} from 'vue-router'
 import { ElMessageBox } from 'element-plus'
 import {Avatar} from '@element-plus/icons-vue'
@@ -35,6 +36,8 @@ export default {
         const { proxy } = getCurrentInstance();
         const router = useRouter();
         const dialogVisible = ref(false)
+        let name = ref('')
+        let direction = ref('')
 
         const handleClose = () => {
             console.log(store.state.count)
@@ -63,11 +66,22 @@ export default {
             //     })
             
             }
-            
 
+        let openuser = () => {
+          dialogVisible.value = true
+          name.value = proxy.$X.state.manageinfo.name
+          direction.value = proxy.$X.state.manageinfo.direction
+        }
+            
+        onMounted(() => {
+          console.log(proxy.$X.state.manageinfo);
+        })
         return{
             dialogVisible,
-            handleClose
+            name,
+            direction,
+            handleClose,
+            openuser
         }
     }
 }
