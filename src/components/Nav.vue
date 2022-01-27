@@ -1,9 +1,9 @@
 <template>
   <div class="nav">
       <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="预约" name="appointment"></el-tab-pane>
-      <el-tab-pane label="操作管理" name="modifycenter"></el-tab-pane>
-      <el-tab-pane label="管理进程" name="modifyprocess"></el-tab-pane>
+      <el-tab-pane label="分数详情" name="Mark"></el-tab-pane>
+      <el-tab-pane label="预约管理" name="Appointment"></el-tab-pane>
+      <el-tab-pane label="叫号" name="Queue"></el-tab-pane>
       <el-tab-pane label="已报名" name="registered"></el-tab-pane>
     </el-tabs>
     <div class="usericon">
@@ -26,7 +26,7 @@ export default {
     Userinfo
   },
   setup(props, context){
-    const activeName = ref('usercenter')
+    const activeName = ref('Mark')
     const handleClick = (tab, event) => {
       // 子组件向父组件传递参数       
       context.emit('listen', activeName._value )

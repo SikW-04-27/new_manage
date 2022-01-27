@@ -1,8 +1,10 @@
 // api接口管理
 import { get, post} from './http'
 
-const url1 = 'http://112.74.33.254:2358/';
-const url2 = 'http://112.74.33.254:2358/';
+// const url1 = 'http://112.74.33.254:2358/';
+// const url2 = 'http://112.74.33.254:2358/';
+const url1 = 'http://120.77.36.73:28888/';
+const url2 = 'http://120.77.36.73:28888/';
 
 // const url2 = 'http://47.107.49.231/';
 

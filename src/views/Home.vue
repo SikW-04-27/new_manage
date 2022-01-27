@@ -4,7 +4,7 @@
         <el-header>
             <Nav 
                 @listen="jump"
-                v-if="proxy.$router.currentRoute.value.fullPath === '/login' ? false : true"
+                v-if="proxy.$router.currentRoute.value.fullPath !== '/login'"
             ></Nav>
             <!-- <Userinfo></Userinfo> -->
         </el-header>
@@ -23,10 +23,11 @@
 <script>
 
             //   @routerChange="openTab"
-import {getCurrentInstance} from 'vue'
+import {getCurrentInstance, onMounted} from 'vue'
 import {useRouter} from 'vue-router'
 import Nav from '../components/Nav.vue'
 import Userinfo from '../components/Userinfo.vue'
+import {attain, complete} from '../request/api'
 export default {
     name: 'Home',
     components: {
@@ -41,6 +42,14 @@ export default {
                 path: `/${data}`
             })
         }  
+
+        // 登录没有将用户信息存到vuex
+        onMounted(()=>{
+            attain().then(res=>{
+                console.log(res);
+                proxy.$X.updata('manageinfo', res.data)
+            })
+        })
 
         return{
             jump,

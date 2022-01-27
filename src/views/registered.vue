@@ -30,7 +30,6 @@
             title="详情"
             width="30%"
             fullscreen
-            :before-close="handleClose"
         >
             <Predetial/>
             <!-- <template #footer>
@@ -42,21 +41,23 @@
             </span>
             </template> -->
         </el-dialog>
-        <el-pagination background layout="prev, pager, next" :total="1000">
-        </el-pagination>
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import {enrolllist} from '../request/api'
+import { ref, computed, onMounted, reactive, getCurrentInstance, provide } from 'vue'
 import Predetial from '../components/Predetial.vue'
+import {ElLoading} from 'element-plus'
 export default {
     name: 'Registered',
     components:{
         Predetial
     },
     setup(){
+        const { proxy } = getCurrentInstance();
         let detialDialog = ref(false)
         const search = ref('')
+        const tableData = reactive([])
         const filterTableData = computed(() =>
             tableData.filter(
                 (data) =>
@@ -66,67 +67,35 @@ export default {
         )
         const opendetial = (index, row) => {
             detialDialog.value = true
+            proxy.$X.updata('registeruser', row)
+            console.log(proxy.$X.state.registeruser);
+            console.log(JSON.parse(JSON.stringify(proxy.$X.state.registeruser)));
+            // provide('user', JSON.parse(JSON.stringify(proxy.$X.state.registeruser)))
         }
         const handleDelete = (index, row) => {
-        console.log(index, row)
+            console.log(index, row)
         }
 
-        const tableData = [
-        {
-            registerTime: '2016-05-03',
-            name: 'Tom',
-            direction: '前端',
-            studentId: 3120003903,
-            major: '计算机学院',
-            college: '软件工程',
-            phoneNumber: 13413422538
-        },
-        {
-            date: '2016-05-02',
-            name: 'John',
-            address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-            date: '2016-05-02',
-            name: 'John',
-            address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-            date: '2016-05-02',
-            name: 'John',
-            address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-            date: '2016-05-02',
-            name: 'John',
-            address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-            date: '2016-05-02',
-            name: 'John',
-            address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-            date: '2016-05-02',
-            name: 'John',
-            address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-            date: '2016-05-02',
-            name: 'John',
-            address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-            date: '2016-05-04',
-            name: 'Morgan',
-            address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-            date: '2016-05-01',
-            name: 'Jessy',
-            address: 'No. 189, Grove St, Los Angeles',
-        },
-        ]
+        const clearregisteruser = () => {
+            // proxy.$X.updata('registeruser', {})
+            console.log(11121);
+        }
+
+
+        // 挂载页面获取数据
+        onMounted(()=>{
+            const loadingInstance = ElLoading.service({ fullscreen: true })
+            enrolllist().then(res => {
+                // hide.value = true;
+                tableData.push(...res.data)
+                loadingInstance.close()
+            }).catch(err => {
+            // hide.value = true;
+            // console.log(err);
+            loadingInstance.close()
+            proxy.$X.showmes('error', '加载错误，请刷新')
+            })
+        })
 
         return {
             search,
@@ -134,6 +103,7 @@ export default {
             detialDialog,
             opendetial,
             handleDelete,
+            clearregisteruser,
             tableData
         }
     }

@@ -39,6 +39,7 @@ import { User, Lock, Key } from '@element-plus/icons-vue'
 import { ref, getCurrentInstance} from 'vue'
 import {userLogin} from '../request/api'
 import {useRouter} from 'vue-router'
+import {ElLoading} from 'element-plus'
 export default {
     name: 'Login',
     setup(props) {
@@ -50,15 +51,30 @@ export default {
         const router = useRouter();
     
         function login(){
+            if (!username.value || !password.value) {
+                proxy.$X.showmes('error', '邮箱或密码不能为空')
+                return;
+            }
+            const loading = ElLoading.service({ fullscreen: true })
             userLogin({
                 keyWord: username.value,
                 password: password.value,
             }).then(result=>{
-                sessionStorage.setItem('USER', '123')
-                console.log(111);
-                router.replace({path: '/registered'})
-                proxy.$X.showmes('success', '成功')
-            })
+                const code = result.code;
+                loading.close()
+                if(code === 2100){
+                    sessionStorage.setItem('USER', result.data.token)
+                    router.replace({path: '/registered'})
+                    proxy.$X.showmes('success', '成功')
+                }else {
+                    loading.close();
+                    proxy.$X.showmes('error', result.message)
+                } 
+                
+            }).catch((e) => {
+                loading.close(e);
+                proxy.$X.showmes('error', '请求失败，请重新登录')
+            });
         }
 
 

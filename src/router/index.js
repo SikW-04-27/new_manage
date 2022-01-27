@@ -26,6 +26,24 @@ const router = createRouter({
             path: '/registered',
             name: 'registered',
             component: _import('registered')
+        },
+        //分数详情
+        {
+            path: '/Mark',
+            name: 'Mark',
+            component: _import('Mark')
+        },
+        // 预约管理
+        {
+            path: '/Appointment',
+            name: 'Appointment',
+            component: _import('Appointment')
+        },
+        // 叫号
+        {
+            path: '/Queue',
+            name: 'Queue',
+            component: _import('Queue')
         }
     ]
 })

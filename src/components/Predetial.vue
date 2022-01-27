@@ -8,20 +8,20 @@
             </el-aside>
             <el-main>
                 <div class="introduce">
-                    <span>姓名: {{user_name}}</span>
+                    <span>姓名: {{proxy.$X.state.registeruser.name}}</span>
                     <el-divider></el-divider>
-                    <span>学院：{{user_major}}</span>
+                    <span>学院：{{proxy.$X.state.registeruser.major}}</span>
                     <el-divider></el-divider>
-                    <span>专业班级：{{user_college}}{{user_class}}</span>
+                    <span>专业班级：{{proxy.$X.state.registeruser.college}}{{proxy.$X.state.registeruser.class}}</span>
                     <el-divider></el-divider>
-                    <span>方向：{{user_direction}}</span>
+                    <span>方向：{{proxy.$X.state.registeruser.direction}}</span>
                     <el-divider></el-divider>
-                    <span>学号：{{user_studentId}}</span>
+                    <span>学号：{{proxy.$X.state.registeruser.studentId}}</span>
                     <el-divider></el-divider>
-                    <span>手机号：{{user_phoneNumber}}</span>
+                    <span>手机号：{{proxy.$X.state.registeruser.phoneNumber}}</span>
                     <el-divider></el-divider>
                     <span>自我介绍：</span>
-                    <div class="person_introduce">{{user_selfIntroduction}}</div>
+                    <div class="person_introduce">{{proxy.$X.state.registeruser.selfIntroduction}}</div>
                 </div>
             </el-main>
             </el-container>
@@ -37,8 +37,17 @@
 </template>
 
 <script>
+import {reactive, getCurrentInstance, watch, toRaw, inject   } from 'vue'
 export default {
-
+    
+        
+    setup(){
+        //此处vuex中的值改变，页面不能实时刷新
+        const { proxy } = getCurrentInstance();
+        return {
+            proxy,
+        }
+    }
 }
 </script>
 
