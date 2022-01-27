@@ -1,8 +1,20 @@
 // npm install vue-router@next -S      vue3安装路由
 // 创建路由器
 import { createRouter, createWebHistory } from 'vue-router'
+import { defineAsyncComponent } from 'vue'
 // 懒加载
-const _import = (path) => () => import(`../views/${path}.vue`);
+// const Home = (path) => {return defineAsyncComponent(() => import('../views/Home.vue'))};
+// const registered = (path) => {return defineAsyncComponent(() => import('../views/registered.vue'))};
+// const Login = (path) => {return defineAsyncComponent(() => import('../views/Login.vue'))};
+// const Mark = (path) => {return defineAsyncComponent(() => import('../views/Mark.vue'))};
+// const Appointment = (path) => {return defineAsyncComponent(() => import('../views/Appointment.vue'))};
+// const Queue = (path) => {return defineAsyncComponent(() => import('../views/Queue.vue'))};
+const Home = (path) => import('../views/Home.vue');
+const registered = (path) => import('../views/registered.vue');
+const Login = (path) => import('../views/Login.vue');
+const Mark = (path) => import('../views/Mark.vue');
+const Appointment = (path) => import('../views/Appointment.vue');
+const Queue = (path) => import('../views/Queue.vue');
 
 
 const router = createRouter({
@@ -12,37 +24,37 @@ const router = createRouter({
         {
             path: '/home',
             name: 'home',
-            component: _import('home')
+            component: Home
         },
         // 登录页面
         {
             path: '/login',
             name: 'login',
-            component: _import('login')
+            component: Login
         },
         // 已报名名单
         {
             path: '/registered',
             name: 'registered',
-            component: _import('registered')
+            component: registered
         },
         //分数详情
         {
             path: '/Mark',
             name: 'Mark',
-            component: _import('Mark')
+            component: Mark
         },
         // 预约管理
         {
             path: '/Appointment',
             name: 'Appointment',
-            component: _import('Appointment')
+            component: Appointment
         },
         // 叫号
         {
             path: '/Queue',
             name: 'Queue',
-            component: _import('Queue')
+            component: Queue
         }
     ]
 })

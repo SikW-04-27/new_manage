@@ -66,13 +66,14 @@ import Detialmark from '../components/Detialmark.vue'
 import FloatMesssage from '../components/FloatMesssage.vue'
 import FloatResult from '../components/FloatResult.vue'
 export default {
+    name: 'Mark',
     components:{
         Detialmark,
         FloatMesssage,
         FloatResult
     },
     props:{
-        data:{}
+        data:{},
     },
     setup(){
         const { proxy } = getCurrentInstance();

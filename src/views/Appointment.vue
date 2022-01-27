@@ -79,6 +79,7 @@ import { reactive, getCurrentInstance, onBeforeMount, ref } from 'vue'
 import { ElLoading } from "element-plus";
 import {listAppointment,deleteAppointmentInfo, appointmentstart, pushToAll, appointmentclose, appointmentcheck} from '../request/api'
 export default {
+    name: 'Appointment',
     components: {
         DetialAppointment,
         FloatWindow

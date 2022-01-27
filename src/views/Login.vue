@@ -33,7 +33,7 @@ import {userLogin} from '../request/api'
 import {useRouter} from 'vue-router'
 import {ElLoading} from 'element-plus'
 export default {
-    name: 'Login',
+    name: 'login',
     setup(props) {
         const { proxy } = getCurrentInstance();
         let username = ref()

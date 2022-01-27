@@ -30,7 +30,7 @@ import Nav from '../components/Nav.vue'
 import Userinfo from '../components/Userinfo.vue'
 import {attain, complete} from '../request/api'
 export default {
-    name: 'Home',
+    name: 'home',
     components: {
         Nav,
         Userinfo

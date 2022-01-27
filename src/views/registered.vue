@@ -63,7 +63,7 @@ import { ref, computed, onMounted, reactive, getCurrentInstance, provide } from 
 import Predetial from '../components/Predetial.vue'
 import {ElLoading} from 'element-plus'
 export default {
-    name: 'Registered',
+    name: 'registered',
     components:{
         Predetial
     },
