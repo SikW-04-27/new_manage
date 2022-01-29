@@ -54,9 +54,7 @@ export default {
                 const code = result.code;
                 loading.close()
                 if(code === 2100){
-                    console.log(1111);
                     proxy.$X.updata('manageinfo', result.data)
-                    console.log(proxy.$X.state.manageinfo);
                     sessionStorage.setItem('USER', result.data.token)
                     router.replace({path: '/registered'})
                     proxy.$X.showmes('success', '成功')
