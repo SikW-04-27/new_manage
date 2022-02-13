@@ -161,6 +161,8 @@ export const startSigned = p => post(`${url1}queue/start`, p)
 // 管理员关闭签到
 export const closeSigned = p => post(`${url1}queue/close`, p)
 
+// 管理员查看当前签到状态
+export const checkIsSigned = p => post(`${url1}queue/ACheck`, p)
 
 
 

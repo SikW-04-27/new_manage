@@ -2,7 +2,7 @@
 <div class="float-signed">
  <switch-signed></switch-signed>
 </div>
- 
+ <div>{{canSigned}}</div>
   <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
     <el-tab-pane label="未面试" name="first">
       <el-table :data="signWaitList" style="width: 100%">
@@ -78,17 +78,22 @@
 </template>
 
 <script setup>
-import { getSignList, sendSignedMsg } from "../request/api";
+import { getSignList, sendSignedMsg, checkIsSigned } from "../request/api";
 
-import { onMounted, reactive, computed, ref } from "vue";
+import { onMounted, reactive, computed, ref} from "vue";
 
 import switchSigned from "../components/switchSigned.vue";
 
 let signWaitList = reactive([]);
 let signPassedList = reactive([]);
+let canSigned = ref('1111')
 const activeName = ref("first");
 
 onMounted(() => {
+  checkIsSigned().then((res) => {
+    console.log(res);
+    canSigned.value = res.message
+  })
   getSignList().then(({ data }) => {
     console.log(data);
     signWaitList.push(...data.waitingList);

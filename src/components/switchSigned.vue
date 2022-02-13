@@ -34,8 +34,11 @@ function handleStartSigned() {
         message: res.message,
         type: "success",
       });
+      setTimeout(() => {
+        location.reload();
+      }, 500);
     } else {
-      ElMessage.error(res.message)
+      ElMessage.error(res.message);
     }
   });
 }
@@ -48,8 +51,11 @@ function handleCloseSigned() {
         message: res.message,
         type: "success",
       });
+      setTimeout(() => {
+        location.reload();
+      }, 500);
     } else {
-      ElMessage.error(res.message)
+      ElMessage.error(res.message);
     }
   });
 }
