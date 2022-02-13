@@ -15,6 +15,7 @@ const Login = (path) => import('../views/Login.vue');
 const Mark = (path) => import('../views/Mark.vue');
 const Appointment = (path) => import('../views/Appointment.vue');
 const Queue = (path) => import('../views/Queue.vue');
+const Signed = (path) => import('../views/Signed.vue')
 
 
 const router = createRouter({
@@ -55,6 +56,12 @@ const router = createRouter({
             path: '/Queue',
             name: 'Queue',
             component: Queue
+        },
+        // 签到管理
+        {
+            path: '/Signed',
+            name: 'Signed',
+            component: Signed
         }
     ]
 })
