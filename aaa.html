@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 'use strict'    
+        var another = {
+            a: 2
+        }
+
+        var other = Object.create(another)
+        console.log(other)
+        console.log(other.a)
+        other.a = 3
+        console.log(other)
+
+
+        var another1 = {}
+        Object.defineProperty(another1, "a", {
+            value: 2,
+            writable: false,
+            configurable: false,
+            enumerable: true
+        })
+        var other1 = Object.create(another1)
+        console.log(other1)
+        console.log(other1.a)
+        other1.a = 3
+        console.log(other1)
+
+        var another2 = {
+            get a(){
+                return this._a_
+            },
+            set a(val){
+                this._a_ = val * 3;
+            }
+        }
+        var other2 = Object.create(another2)
+        console.log(other2)
+        console.log(other2.a)
+        other2.a = 3
+        console.log(other2)
+    </script>
+</body>
+</html>

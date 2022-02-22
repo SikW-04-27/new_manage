@@ -5,8 +5,6 @@ import { get, post} from './http'
 // const url2 = 'http://112.74.33.254:2358/';
 const url1 = 'https://lixianghao.top:2358/';
 const url2 = 'https://lixianghao.top:2358/';
-// const url1 = 'http://120.77.36.73:28888/';
-// const url2 = 'http://120.77.36.73:28888/';
 
 // const url2 = 'http://47.107.49.231/';
 
@@ -151,9 +149,20 @@ export const loadavatar = p => post(`${url2}load/avatar`, p);
 // 推送消息给某个用户
 export const pushToUser = p => post(`${url1}message/pushToUser`, p);
 
+// 获取签到用户
+export const getSignList = p => post(`${url1}queue/getList`, p)
 
+// 发送订阅消息
+export const sendSignedMsg = p => post(`${url1}w/push`, p)
 
+// 管理员开启签到
+export const startSigned = p => post(`${url1}queue/start`, p)
 
+// 管理员关闭签到
+export const closeSigned = p => post(`${url1}queue/close`, p)
+
+// 管理员查看当前签到状态
+export const checkIsSigned = p => post(`${url1}queue/ACheck`, p)
 
 
 
