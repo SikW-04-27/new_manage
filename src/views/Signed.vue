@@ -84,6 +84,8 @@ import { onMounted, reactive, computed, ref} from "vue";
 
 import switchSigned from "../components/switchSigned.vue";
 
+import { ElMessage } from "element-plus";
+
 let signWaitList = reactive([]);
 let signPassedList = reactive([]);
 let canSigned = ref('1111')
@@ -115,10 +117,15 @@ const handleDelete = (index, row) => {
   }).then((res) => {
     console.log(res);
     if (res.code == "10086") {
-      // 订阅成功
+      // 发送成功
+       ElMessage({
+        message: '发送成功',
+        type: "success",
+      })    
       signWaitList.shift();
     } else {
-      // 订阅失败
+      // 发送失败
+      ElMessage.error(res.message);
     }
   });
   //   console.log(Proxy.token);
