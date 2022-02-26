@@ -1,15 +1,16 @@
 <template>
   <el-popconfirm title="确定开启签到吗？" @confirm="handleStartSigned">
     <template #reference>
-      <el-button type="success" :icon="Check" circle></el-button>
+      <el-button class="btn1" type="success" :icon="Check" circle></el-button>
     </template>
   </el-popconfirm>
 
   <el-popconfirm title="确定关闭签到吗?" @confirm="handleCloseSigned">
     <template #reference>
-      <el-button type="danger" :icon="Delete" circle></el-button>
+      <el-button class="btn2" type="danger" :icon="Delete" circle></el-button>
     </template>
   </el-popconfirm>
+  <div class="signTip" style="width:100%;">{{ canSigned }}</div>
 </template>
 
 <script setup>
@@ -24,7 +25,18 @@ import {
 
 import { ElMessage } from "element-plus";
 
-import { startSigned, closeSigned } from "../request/api";
+import { startSigned, closeSigned, checkIsSigned } from "../request/api";
+
+import { onMounted, ref } from "vue";
+
+let canSigned = ref("1111");
+
+onMounted(() => {
+  checkIsSigned().then((res) => {
+    // console.log(res);
+    canSigned.value = res.message;
+  });
+});
 
 function handleStartSigned() {
   startSigned().then((res) => {
@@ -34,9 +46,13 @@ function handleStartSigned() {
         message: res.message,
         type: "success",
       });
-      setTimeout(() => {
-        location.reload();
-      }, 500);
+      checkIsSigned().then((res) => {
+        // console.log(res);
+        canSigned.value = res.message;
+      });
+      // setTimeout(() => {
+      //   location.reload();
+      // }, 500);
     } else {
       ElMessage.error(res.message);
     }
@@ -51,9 +67,13 @@ function handleCloseSigned() {
         message: res.message,
         type: "success",
       });
-      setTimeout(() => {
-        location.reload();
-      }, 500);
+      checkIsSigned().then((res) => {
+        // console.log(res);
+        canSigned.value = res.message;
+      });
+      // setTimeout(() => {
+      //   location.reload();
+      // }, 500);
     } else {
       ElMessage.error(res.message);
     }
@@ -62,4 +82,23 @@ function handleCloseSigned() {
 </script>
 
 <style>
+
+.btn1, 
+.btn2 {
+  position: absolute;
+}
+
+.btn1 {
+  right: 70px
+}
+
+.btn2 {
+  right: 30px;
+}
+
+/* .signTip {
+  position: absolute;
+  top: 0;
+  left: 0;
+} */
 </style>

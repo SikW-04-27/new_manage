@@ -2,7 +2,6 @@
 <div class="float-signed">
  <switch-signed></switch-signed>
 </div>
- <div>{{canSigned}}</div>
   <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
     <el-tab-pane label="未面试" name="first">
       <el-table :data="signWaitList" style="width: 100%">
@@ -144,7 +143,8 @@ computed(() => {});
 }
 
 .float-signed {
-  position: absolute;
+  /* position: absolute; */
+  width: 100%;
   top: 65px;
   right: 45px;
   z-index: 11;
