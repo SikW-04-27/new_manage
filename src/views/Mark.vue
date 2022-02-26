@@ -6,18 +6,33 @@
         </div>
         <el-table :data="filterTableData" style="width: 100%">
             <!-- <el-table-column type="selection" class-name="play"></el-table-column> -->
-            <el-table-column prop="name" label="姓名" width="170"> </el-table-column>
-            <el-table-column prop="examAvg" sortable label="笔试" width="170">
+            <el-table-column prop="name" label="姓名" width="160"> </el-table-column>
+            <el-table-column prop="examAvg" sortable label="笔试" width="160">
             </el-table-column>
-            <el-table-column prop="firstInterviewAvg" sortable label="面试" width="170">
+            <el-table-column prop="firstInterviewAvg" sortable label="面试" width="160">
             </el-table-column>
-            <el-table-column prop="firstReviewAvg" sortable label="一轮考核" width="170">
+            <el-table-column prop="firstReviewAvg" sortable label="一轮考核" width="160">
             </el-table-column>
-            <el-table-column prop="secondReviewAvg" sortable label="二轮考核" width="170">
+            <el-table-column prop="secondReviewAvg" sortable label="二轮考核" width="160">
             </el-table-column>
-            <el-table-column prop="totalAvg" sortable label="平均分" width="170">
+            <el-table-column prop="totalAvg" sortable label="平均分" width="160">
             </el-table-column>
-            <el-table-column align="left" width="170">
+            
+            <el-table-column
+                prop="status"
+                label="状态"
+                width="100"
+                sortable
+                >
+                <template #default="scope">
+                    <el-tag
+                    :type="scope.row.userStatus === '通过' ? 'success' :(scope.row.userStatus===  '淘汰'? 'danger' : (scope.row.userStatus==='等待结果' ? 'warning' : 'info'))"
+                    disable-transitions
+                    >{{ scope.row.userStatus}}</el-tag
+                    >
+                </template>
+            </el-table-column>
+            <el-table-column align="left" width="230">
             <template #header>
                 <el-input v-model="search" size="small" placeholder="Type to search" />
             </template>
@@ -37,10 +52,29 @@
                         <el-button
                         size="small"
                         type="danger"
+                        :disabled = "(scope.row.userStatus==='通过'||scope.row.userStatus==='淘汰')"
                         >淘汰</el-button
                         >
                     </template>
                 </el-popconfirm>
+
+                <el-popconfirm 
+                    confirm-button-text="确认"
+                    cancel-button-text="返回"
+                    :icon="InfoFilled"
+                    icon-color="red"
+                    title="注意：此操作不可撤回"
+                    @confirm="confirmEvent2(scope.$index, scope.row)">
+                    <template #reference>
+                        <el-button
+                        size="small"
+                        type="success"
+                        :disabled = "(scope.row.userStatus==='通过'||scope.row.userStatus==='淘汰'||scope.row.userStatus==='未预约')"
+                        >通过</el-button
+                        >
+                    </template>
+                </el-popconfirm>
+
             </template>
             </el-table-column>
         </el-table>
@@ -59,7 +93,7 @@
 
 <script>
 import { InfoFilled } from '@element-plus/icons-vue'
-import {listAllUser, batcheliminate} from '../request/api'
+import {listAllUser, batcheliminate, pass} from '../request/api'
 import {ref, computed, reactive, onMounted, getCurrentInstance} from 'vue'
 import {ElLoading} from 'element-plus'
 import Detialmark from '../components/Detialmark.vue'
@@ -111,6 +145,20 @@ export default {
                 proxy.$X.showmes('error', err.data)
             })
         }
+        // 通过
+        const confirmEvent2 = (index,row) => {
+            let loadingInstance1 = ElLoading.service({fullscreen: true});
+            pass({
+                ids: [JSON.parse(JSON.stringify(row)).uuid]
+            }).then(res => {
+                loadingInstance1.close()
+                location.reload();
+                console.log(res);
+            }).catch(err => {
+                loadingInstance1.close()
+                proxy.$X.showmes('error', err.data)
+            })
+        }
         const cancelEvent = () => {
             console.log('cancel!')
         }
@@ -152,7 +200,8 @@ export default {
             handleEdit,
             handleDelete,
             confirmEvent,
-            cancelEvent
+            cancelEvent,
+            confirmEvent2
         }
     }
 }

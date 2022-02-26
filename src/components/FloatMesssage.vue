@@ -61,6 +61,7 @@ export default {
                     loadingInstance.close()
                     message.value = ''
                     proxy.$X.showmes('success', '推送成功')
+                    dialogVisible.value = false
                 }
                 
             }).catch(err=>{

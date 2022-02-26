@@ -34,6 +34,8 @@ export default {
   setup(props, context){
     const {proxy} = getCurrentInstance();
     const activeName = ref('registered')
+    
+
     const handleClick = (tab, event) => {
       // 子组件向父组件传递参数       
       context.emit('listen', activeName._value )

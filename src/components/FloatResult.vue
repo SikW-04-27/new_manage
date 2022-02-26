@@ -68,18 +68,25 @@ export default {
                             lose_message.value = ''
                             location.reload()
                             proxy.$X.showmes('success', '推送成功')
+                            dialogVisible.value = false
                         })
                         
                     }else if(res.code == 1902){
+                        win_message.value = ''
+                        lose_message.value = ''
                         proxy.$X.showmes('warning', res.message)
-                    }
-                    console.log(res);
-                }).catch(err=>{
-                    if(err.data.code ===1904){
-                        proxy.$X.showmes('error', err.data.message)
+                        dialogVisible.value = false
+                    }else if(res.code ===1904){
+                        win_message.value = ''
+                        lose_message.value = ''
+                        proxy.$X.showmes('error', res.message)
+                        dialogVisible.value = false
                     }else{
                         proxy.$X.showmes('error', '推送失败')
                     }
+                    console.log(res);
+                }).catch(err=>{
+                    proxy.$X.showmes('error', '推送失败')
                     
                 })
             }else{
