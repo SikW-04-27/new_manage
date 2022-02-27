@@ -5,6 +5,7 @@
       <el-tab-pane label="预约管理" name="Appointment"></el-tab-pane>
       <el-tab-pane label="已报名" name="registered"></el-tab-pane>
       <el-tab-pane label="签到管理" name="Signed"></el-tab-pane>
+      <el-tab-pane label="招新状态管理" name="Status"></el-tab-pane>
     </el-tabs>
     <div class="usericon">
       <Userinfo></Userinfo>

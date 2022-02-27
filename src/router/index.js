@@ -16,6 +16,7 @@ const Mark = (path) => import('../views/Mark.vue');
 const Appointment = (path) => import('../views/Appointment.vue');
 const Queue = (path) => import('../views/Queue.vue');
 const Signed = (path) => import('../views/Signed.vue')
+const Status = (path) => import('../views/StatusManage.vue')
 
 
 const router = createRouter({
@@ -62,6 +63,12 @@ const router = createRouter({
             path: '/Signed',
             name: 'Signed',
             component: Signed
+        },
+         // 招新状态管理
+         {
+            path: '/Status',
+            name: 'Status',
+            component: Status
         }
     ]
 })

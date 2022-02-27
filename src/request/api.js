@@ -164,6 +164,10 @@ export const closeSigned = p => post(`${url1}queue/close`, p)
 // 管理员查看当前签到状态
 export const checkIsSigned = p => post(`${url1}queue/ACheck`, p)
 
+// 管理员切换招新下一状态
+export const nextStatus = p => post(`${url1}/status/updateStatus`, p)
+
+//
 
 
 
