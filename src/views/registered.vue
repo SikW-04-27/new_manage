@@ -14,9 +14,9 @@
                 >
                 <template #default="scope">
                     <el-tag
-                    :type="scope.row.status === '淘汰' ? 'danger' : 'success'"
+                    :type="scope.row.status.includes('淘汰') ? 'danger' : 'success'"
                     disable-transitions
-                    >{{ scope.row.status === '淘汰' ? '已淘汰' : '考核中' }}</el-tag
+                    >{{ scope.row.status.includes('淘汰') ? '已淘汰' : '考核中' }}</el-tag
                     >
                 </template>
             </el-table-column>

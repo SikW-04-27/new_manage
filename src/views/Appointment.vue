@@ -33,6 +33,19 @@
             <el-table-column prop="endTime" label="结束时间" width="250" />
             <el-table-column prop="count" label="剩余可预约人数" />
             <el-table-column prop="capacity" label="设置人数" />
+            <el-table-column
+                prop="status"
+                label="状态"
+                width="250"
+                sortable
+                >
+                <template #default="scope">
+                    <el-tag
+                    disable-transitions
+                    >{{ scope.row.direction}}</el-tag
+                    >
+                </template>
+            </el-table-column>
             <el-table-column label="Operations">
             <template #default="scope">
                 <el-button size="small" @click="handleEdit(scope.$index, scope.row)"
