@@ -7,6 +7,7 @@
         <el-table :data="filterTableData" style="width: 100%">
             <!-- <el-table-column type="selection" class-name="play"></el-table-column> -->
             <el-table-column prop="name" label="姓名" width="160"> </el-table-column>
+            <el-table-column prop="direction" label="方向" width="160" sortable> </el-table-column>
             <el-table-column prop="examAvg" sortable label="笔试" width="160">
             </el-table-column>
             <el-table-column prop="firstInterviewAvg" sortable label="面试" width="160">

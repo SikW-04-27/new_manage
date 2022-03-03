@@ -1,8 +1,9 @@
 <template>
-      <el-table :data="filterTableData" style="width: 100%" max-height="455">
+      <el-table :data="filterTableData" style="width: 100%">
             <el-table-column prop="registerTime" label="报名日期" width="180"></el-table-column>
             <el-table-column prop="name" label="姓名" width="120"></el-table-column>
-            <el-table-column prop="direction" label="方向" width="120"></el-table-column>
+            <el-table-column prop="direction" label="方向" width="120" sortable></el-table-column>
+            <el-table-column prop="gender" label="性别" width="120" sortable></el-table-column>
             <!-- <el-table-column prop="studentId" label="学号" width="120"></el-table-column> -->
             <el-table-column prop="major" label="学院" width="200"></el-table-column>
             <el-table-column prop="college" label="专业" width="200"></el-table-column>
